@@ -18,6 +18,7 @@
       @tab="filterTodo"
       @clearAllCompleted="clearAllComplete"
     )
+    //- router-view
 </template>
 
 <script>
@@ -27,6 +28,21 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
+  beforeRouteEnter(to, from, next) {
+    console.log('todo route enter')
+    next(vm => {
+      console.log(vm.filter)
+    })
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log('todo route update')
+    next()
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log('todo route leave')
+    next()
+  },
+  props: ['id'],
   data() {
     return {
       todos: [],
@@ -64,7 +80,11 @@ export default {
     clearAllComplete() {
       this.todos = this.todos.filter(todo => todo.complete === false)
     }
-  }
+  },
+  mounted() {
+    // console.log(this.$route)
+    // console.log(this.id)
+  },
 }
 </script>
 

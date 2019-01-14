@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const baseConfig = require('./webpack.config.base')
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -15,7 +16,8 @@ const defaultPlugins = [
     }
   }),
   new VueLoaderPlugin(),
-  new HtmlPlugin()
+  new HtmlPlugin(),
+  new VueClientPlugin()
 ]
 
 const devServer = {
@@ -25,6 +27,9 @@ const devServer = {
     errors: true
   },
   hot: true,
+  historyApiFallback: {
+    index: '/index.html'
+  }
 }
 
 if (isDev) {
