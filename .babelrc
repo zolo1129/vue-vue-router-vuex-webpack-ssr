@@ -3,6 +3,7 @@
     'env'
   ],
   'plugins': [
-    'transform-vue-jsx'
+    'transform-vue-jsx',
+    '@babel/plugin-syntax-dynamic-import'
   ]
 }

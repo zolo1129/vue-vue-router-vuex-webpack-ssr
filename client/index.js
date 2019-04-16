@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import App from './app.vue'
 import VueRouter from 'vue-router'
-import Vuex from 'vuex'
 import createRouter from './config/router'
+import Vuex from 'vuex'
 import creatStore from './store/store'
 
 import './assets/styles/global.sass'
-import actions from './store/actions/actions';
+// // // import actions from './store/actions/actions';
 
 const root = document.createElement('div')
 document.body.appendChild(root)
@@ -17,11 +17,11 @@ Vue.use(Vuex)
 const router = createRouter()
 const store = creatStore()
 
-store.registerModule('c', {
-  state: {
-    text: 'ccc'
-  }
-})
+// store.registerModule('c', {
+//   state: {
+//     text: 'ccc'
+//   }
+// })
 
 // store.watch((state) => state.count + 1, (newCount) => {
 //   console.log('newCount watch: ', newCount)

@@ -3,7 +3,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueServerPlugin = require('vue-server-renderer/server-plugin')
 
 let config
@@ -11,26 +10,20 @@ let config
 config = merge(baseConfig, {
   target: 'node',
   entry: path.join(__dirname, '../client/server-entry.js'),
+  devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs2',
     filename: 'server-entry.js',
-    path: path.join(__dirname, '../server-build')
+    path: path.join(__dirname, '../server-build'),
   },
   externals: Object.keys(require('../package.json').dependencies),
-  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.sass$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          'vue-style-loader',
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
-          },
           {
             loader: 'sass-loader',
             options: {
@@ -42,16 +35,15 @@ config = merge(baseConfig, {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
     }),
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'styles/[name].css',
-      chunkFilename: '[id].css'
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: 'styles/[name].css',
+    //   chunkFilename: '[id].css'
+    // }),
     new VueServerPlugin()
   ]
 })

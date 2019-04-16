@@ -1,4 +1,3 @@
-// const pug = require('pug')
 const ejs = require('ejs')
 
 module.exports = async (ctx, renderer, template) => {

@@ -6,7 +6,7 @@
     p Vuex_fullname: {{fullName}}
     p vuex_modules_a: {{textA}} - {{textPlus}}
     p vuex_modules_b: {{textB}}
-    p vuex_modules_c: {{textC}}
+    // p vuex_modules_c: {{textC}}
     //- Todo
     router-link(:to="{name: 'app'}") app |
     router-link(to="/login")  login |
@@ -14,7 +14,7 @@
     transition(name="fade")
       router-view
     Footer
-    router-view(name="a")
+    // router-view(name="a")
 </template>
 
 <script>
@@ -65,8 +65,7 @@ export default {
       // counter: 'count'
       counter: (state) => state.count,
       textA: (state) => state.a.text,
-      textB: (state) => state.b.text,
-      textC: (state) => state.c.text
+      textB: (state) => state.b.text
     }),
     // count() {
     //   return this.$store.state.count

@@ -7,29 +7,18 @@ export default [
     redirect: '/app'
   },
   {
-    // path: '/app/:id',
     path: '/app',
     // props: true,
-    components: {
-      default: () => import('../views/todo/todo.vue'),
-      a: () => import('../views/login/login.vue')
-    },
-    component: () => import('../views/todo/todo.vue'),
-    // name: 'app',
-    // beforeEnter(to, from, next) {
-    //   console.log('app route enter')
-    //   next()
+    // components: {
+    //   default: () => import('../views/todo/todo.vue'),
+    //   a: () => import('../views/login/login.vue)
     // },
+    component: () => import('../views/todo/todo.vue'),
+    name: 'app',
     meta: {
       title: 'this is app',
       discription: 'page discription'
-    },
-    // children: [
-    //   {
-    //     path: 'test',
-    //     component: Login
-    //   }
-    // ]
+    }
   },
   {
     path: '/login',
