@@ -8,11 +8,16 @@ import creatStore from './store/store'
 import './assets/styles/global.sass'
 // // // import actions from './store/actions/actions';
 
+import Notification from './components/notification'
+import Tabs from './components/tabs'
+
 const root = document.createElement('div')
 document.body.appendChild(root)
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(Notification)
+Vue.use(Tabs)
 
 const router = createRouter()
 const store = creatStore()

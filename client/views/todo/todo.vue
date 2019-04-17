@@ -1,5 +1,8 @@
 <template lang="pug">
   .app-todo
+    .tab-container
+      tabs(:value="filter" @change="handleChangeTab")
+        tab(:label="tab" :index="tab" v-for="tab in states" :key="tab")
     input.app-input(
       type="text"
       placeholder="待办事项"
@@ -12,7 +15,7 @@
       :key="todo.id"
       @del='deleteTodo'
     )
-    Tabs(
+    Helper(
       :filter="filter"
       :todos="todos"
       @tab="filterTodo"
@@ -23,7 +26,7 @@
 
 <script>
 import Item from './item.vue'
-import Tabs from './tabs.vue'
+import Helper from './help.vue'
 
 let id = 0
 
@@ -46,12 +49,13 @@ export default {
   data() {
     return {
       todos: [],
-      filter: '所有'
+      filter: '所有',
+      states: ['所有', '未完成', '已完成']
     }
   },
   components: {
     Item,
-    Tabs
+    Helper
   },
   computed: {
     filteredTodos() {
@@ -79,6 +83,9 @@ export default {
     },
     clearAllComplete() {
       this.todos = this.todos.filter(todo => todo.complete === false)
+    },
+    handleChangeTab(value) {
+      this.filter = value
     }
   },
   mounted() {
@@ -104,6 +111,9 @@ export default {
   box-sizing: border-box
 .app-input::-webkit-input-placeholder
   color: #ccc
+.tab-container
+  background: #fff
+  padding: 0 20px
 </style>
 
 

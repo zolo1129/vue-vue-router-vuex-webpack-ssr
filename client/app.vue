@@ -2,17 +2,18 @@
   #app
     .cover
     Header
-    p Vuex: {{counter}}
-    p Vuex_fullname: {{fullName}}
-    p vuex_modules_a: {{textA}} - {{textPlus}}
-    p vuex_modules_b: {{textB}}
+    // p Vuex: {{counter}}
+    // p Vuex_fullname: {{fullName}}
+    // p vuex_modules_a: {{textA}} - {{textPlus}}
+    // p vuex_modules_b: {{textB}}
     // p vuex_modules_c: {{textC}}
     //- Todo
-    router-link(:to="{name: 'app'}") app |
-    router-link(to="/login")  login |
+    // router-link(:to="{name: 'app'}") app |
+    // router-link(to="/login")  login |
     //- router-link(to="/app/123")  app/123
     transition(name="fade")
       router-view
+    // button(@click="notify") notify
     Footer
     // router-view(name="a")
 </template>
@@ -49,10 +50,21 @@ export default {
     // setInterval(() => {
     //   this.updateCount(i++)
     // }, 1000)
+
+    // this.$notify({
+    //   content: 'test notify test notify test notify test notify',
+    //   btn: 'close'
+    // })
   },
   methods: {
     ...mapMutations(['updateCount', 'a/updateText']),
-    ...mapActions(['updateCountAsync', 'a/add', 'b/textAction'])
+    ...mapActions(['updateCountAsync', 'a/add', 'b/textAction']),
+    notify() {
+      this.$notify({
+        content: 'test notify test notify test notify test notify',
+        btn: 'close'
+      })
+    }
   },
   computed: {
     // textA () {
