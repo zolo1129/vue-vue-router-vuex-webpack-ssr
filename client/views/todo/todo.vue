@@ -14,6 +14,7 @@
       v-for="todo in filteredTodos"
       :key="todo.id"
       @del='deleteTodo'
+      @todoUpdate="todoUpdate"
     )
     Helper(
       :filter="filter"
@@ -68,24 +69,50 @@ export default {
   },
   methods: {
     addTodo(e) {
-      this.todos.unshift({
-        id: id++,
-        content: e.target.value.trim(),
-        complete: false
-      })
-      e.target.value = ''
+      if (e.target.value.trim().length === 0) {
+        this.$notify({
+          content: '请输入内容'
+        })
+      } else {
+        this.todos.unshift({
+          id: id++,
+          content: e.target.value.trim(),
+          complete: false
+        })
+        e.target.value = ''
+        this.$notify({
+          content: '事件已添加'
+        })
+      }
     },
     deleteTodo(id) {
       this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+      this.$notify({
+        content: '事件已删除'
+      })
     },
     filterTodo(state) {
       this.filter = state
     },
     clearAllComplete() {
       this.todos = this.todos.filter(todo => todo.complete === false)
+      this.$notify({
+        content: '所有已完成事件已删除'
+      })
     },
     handleChangeTab(value) {
       this.filter = value
+    },
+    todoUpdate(e) {
+      if (e.target.checked) {
+        this.$notify({
+          content: '这件事做完了'
+        })
+      } else {
+        this.$notify({
+          content: '重做这件事'
+        })
+      }
     }
   },
   mounted() {

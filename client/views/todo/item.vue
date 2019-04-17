@@ -3,6 +3,7 @@
     input.toggle(
       type="checkbox"
       v-model="todo.complete"
+      @input="todoUpdate"
     )
     label {{todo.content}}
     button.delete(@click="deleteTodo") 删除
@@ -19,6 +20,9 @@ export default {
   methods: {
     deleteTodo() {
       this.$emit('del', this.todo.id)
+    },
+    todoUpdate(e) {
+      this.$emit('todoUpdate', e)
     }
   }
 }
